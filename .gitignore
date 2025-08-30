@@ -1,0 +1,98 @@
+# See https://help.github.com/posts/ignoring-files/ for more about ignoring files.
+
+/.env
+
+# dependencies
+src/server/node_modules
+src/server/.pnp
+src/server/.pnp.*
+src/server/.yarn/*
+src/server/!.yarn/patches
+src/server/!.yarn/plugins
+src/server/!.yarn/releases
+src/server/!.yarn/versions
+
+# testing
+src/server/coverage
+
+# next.js
+src/server/.next/
+src/server/out/
+src/server/disc
+src/server/src/logs
+src/server/dist
+
+# production
+src/server/build
+src/server/uploads
+
+# misc
+src/server/.DS_Store
+src/server/*.pem
+
+# debug
+src/server/npm-debug.log*
+src/server/yarn-debug.log*
+src/server/yarn-error.log*
+
+src/server/.env
+src/server/.env.development.local
+src/server/.env.production.local
+src/server/.env.test.local
+src/server/.env.development
+src/server/.env.production
+src/server/.env.test
+
+# vercel
+src/server/.vercel
+
+# typescript
+src/server/*.tsbuildinfo
+src/server/next-env.d.ts
+
+src/server/db.json
+
+# CLIENT
+
+src/client/node_modules
+src/client/.pnp
+src/client/.pnp.*
+src/client/.yarn/*
+src/client/!.yarn/patches
+src/client/!.yarn/plugins
+src/client/!.yarn/releases
+src/client/!.yarn/versions
+
+# testing
+src/client/coverage
+
+# next.js
+src/client/.next/
+src/client/out/
+src/client/disc
+src/client/src/logs
+
+# production
+src/client/build
+
+# misc
+src/client/.DS_Store
+src/client/*.pem
+
+# debug
+src/client/npm-debug.log*
+src/client/yarn-debug.log*
+src/client/yarn-error.log*
+# src/client
+
+src/client/# env files (can opt-in for committing if needed)
+src/client/.env
+src/client/.next
+# vercel
+src/client/.vercel
+
+# typescript
+src/client/*.tsbuildinfo
+src/client/next-env.d.ts
+
+src/client/db.json

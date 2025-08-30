@@ -1,0 +1,121 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "CodeFlow API",
+    "version": "1.0.0",
+    "description": "Auto-generated API documentation for CodeFlow application"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "CreateUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email address",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User password (minimum 6 characters)",
+            "example": "password123"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "User full name",
+            "example": "John Doe"
+          },
+          "githubUsername": {
+            "type": "string",
+            "description": "GitHub username",
+            "example": "johndoe"
+          }
+        },
+        "required": [
+          "email",
+          "password",
+          "fullName"
+        ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "fullName": {
+            "type": "string",
+            "description": "User full name",
+            "example": "John Doe Updated"
+          },
+          "githubUsername": {
+            "type": "string",
+            "description": "GitHub username",
+            "example": "johndoe_new"
+          },
+          "bio": {
+            "type": "string",
+            "description": "User bio",
+            "example": "Software Developer"
+          }
+        },
+        "required": []
+      },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "User unique identifier",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "description": "User email address",
+            "example": "user@example.com"
+          },
+          "fullName": {
+            "type": "string",
+            "description": "User full name",
+            "example": "John Doe"
+          },
+          "githubUsername": {
+            "type": "string",
+            "description": "GitHub username",
+            "example": "johndoe"
+          },
+          "bio": {
+            "type": "string",
+            "description": "User bio",
+            "example": "Software Developer"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "User creation date",
+            "example": "2024-01-01T00:00:00.000Z",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "User last update date",
+            "example": "2024-01-01T00:00:00.000Z",
+            "format": "date-time"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  "paths": {},
+  "tags": []
+}

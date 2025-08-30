@@ -1,0 +1,11 @@
+### Get Topic Status (All topics)
+GET http://localhost:3001/api/dashboard/topic-status
+Authorization: Bearer YOUR_ADMIN_JWT_TOKEN
+
+### Get Topic Status for specific course
+GET http://localhost:3001/api/dashboard/topic-status?courseId=YOUR_COURSE_ID
+Authorization: Bearer YOUR_ADMIN_JWT_TOKEN
+
+### Get Topic Status with real course ID example (replace with actual ID)
+GET http://localhost:3001/api/dashboard/topic-status?courseId=550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer YOUR_ADMIN_JWT_TOKEN

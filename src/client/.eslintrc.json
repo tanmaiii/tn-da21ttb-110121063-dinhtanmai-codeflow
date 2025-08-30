@@ -1,0 +1,21 @@
+{
+    "extends": "next/core-web-vitals",
+    "rules":{
+        "no-restricted-imports": [
+            "error",
+            // {
+            //     "name" : "next/link",
+            //     "message": "Please use the new app router with the new link component. See https://nextjs.org/docs/app/building-your-application/routing/link"
+            // },
+            {
+                "name": "lucide-react",
+                "message": "Please use the new app router with the new icon component. See https://lucide.dev/docs/react",
+            },
+            {
+                "name": "next/navigation",
+                "message": "Please use the new app router with the new navigation component. See https://nextjs.org/docs/app/building-your-application/routing/navigation",
+                "importNames": ["useRouter", "redirect", "usePathname", "useSearchParams"],
+            }
+        ]
+    }
+}
