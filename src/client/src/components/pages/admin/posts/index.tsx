@@ -12,7 +12,7 @@ import MemberAvatar from '@/components/ui/member-avatar';
 import { TextDescription } from '@/components/ui/text';
 import { STATUS_HIDDEN } from '@/constants/object';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Post_GetAll from '@/hooks/query-hooks/Post/useQ_Post_GetAll';
 import { useDebounce } from '@/hooks/useDebounce';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
@@ -75,7 +75,7 @@ export default function Posts() {
             <div className="flex flex-col">
               <Link
                 className="hover:underline"
-                href={localPath(paths.POST_DETAIL(row.original.id))}
+                href={localPath(Paths.POST_DETAIL(row.original.id))}
               >
                 {row.original.title}
               </Link>
@@ -174,7 +174,7 @@ export default function Posts() {
     return (
       <>
         <Button
-          onClick={() => router.push(`/admin/${paths.POST_CREATE}`)}
+          onClick={() => router.push(`/admin/${Paths.POST_CREATE}`)}
           variant="outline"
           size="sm"
           className="w-fit"
@@ -232,7 +232,7 @@ export default function Posts() {
             ) : (
               <ActionIcon
                 actionType={'update'}
-                onClick={() => router.push(`/admin/${paths.POST_UPDATE(row.original.id)}`)}
+                onClick={() => router.push(`/admin/${Paths.POST_UPDATE(row.original.id)}`)}
                 type="button"
               />
             )}

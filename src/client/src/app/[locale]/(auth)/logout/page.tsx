@@ -1,6 +1,6 @@
 "use client";
 
-import { paths } from "@/data/path";
+import { Paths } from "@/data/path";
 import authService from "@/services/auth.service";
 import tokenService from "@/services/token.service";
 import { useUserStore } from "@/stores/user_store";
@@ -16,7 +16,7 @@ export default function Page() {
       await authService.logout();
       removeUser();
       tokenService.clearTokens();
-      router.push(paths.LOGIN);
+      router.push(Paths.LOGIN);
     };
     logout();
   }, [removeUser, router]);

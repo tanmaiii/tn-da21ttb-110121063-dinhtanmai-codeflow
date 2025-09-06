@@ -1,7 +1,7 @@
 import Header from '@/components/layout/Header/Header';
 import Sidebar from '@/components/layout/Sidebar';
 import { menuAdmin } from '@/data/menuAdmin';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
     <div className="flex flex-col h-screen">
       <Header />
       <div className="flex flex-1 mt-14">
-        <Sidebar prefix={paths.ADMIN} menu={menuAdmin} />
+        <Sidebar prefix={Paths.ADMIN} menu={menuAdmin} />
         <div className="w-full">{children}</div>
       </div>
     </div>

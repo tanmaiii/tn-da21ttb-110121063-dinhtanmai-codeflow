@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { auth, provider } from '@/config/Firebase';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import authService from '@/services/auth.service';
 import tokenService from '@/services/token.service';
@@ -45,13 +45,13 @@ export default function LoginWithGitHub({ ...props }: React.ComponentProps<'butt
 
         // 👉 Check nếu user chưa chấp nhận lời mời vào tổ chức
         if (res.data.status !== "active") {
-          router.push(localPath(paths.JOIN_ORG(res.accessToken.token))); 
+          router.push(localPath(Paths.JOIN_ORG(res.accessToken.token))); 
           return;
         }
 
         tokenService.accessToken = res.accessToken.token;
         setUser(res.data);
-        router.push(paths.HOME);
+        router.push(Paths.HOME);
       })
       .catch(error => {
         console.log(error);

@@ -28,13 +28,13 @@ RUN npm install
 COPY . .
 
 # Build the application
-RUN npm run build
+# RUN npm run build
 
 # Create necessary directories
-RUN mkdir -p logs uploads
+RUN mkdir -p logs uploads uploads/images uploads/files
 
 # Expose port
 EXPOSE 3000
 
 # Start application
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

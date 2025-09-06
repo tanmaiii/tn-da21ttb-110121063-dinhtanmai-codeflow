@@ -1,6 +1,7 @@
 # See https://help.github.com/posts/ignoring-files/ for more about ignoring files.
 
 /.env
+/.env*
 
 # dependencies
 src/server/node_modules
@@ -87,6 +88,7 @@ src/client/yarn-error.log*
 
 src/client/# env files (can opt-in for committing if needed)
 src/client/.env
+src/client/.env*
 src/client/.next
 # vercel
 src/client/.vercel

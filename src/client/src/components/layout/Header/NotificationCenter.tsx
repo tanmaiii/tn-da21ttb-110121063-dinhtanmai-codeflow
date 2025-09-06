@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import NotificationItem, { IconNotification } from '@/components/common/NotificationItem';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Notification_GetAllByUser from '@/hooks/query-hooks/Notification/useQ_Notification_GetAllByUser';
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { INotification } from '@/interfaces/notification';
@@ -91,7 +91,7 @@ const NotificationCenter: React.FC = () => {
     };
   }, [user]);
 
-  const handleSeeAll = () => router.push(paths.NOTIFICATION);
+  const handleSeeAll = () => router.push(Paths.NOTIFICATION);
 
   const renderNotificationContent = () => (
     <ScrollArea className="min-h-[300px] rounded-md border">

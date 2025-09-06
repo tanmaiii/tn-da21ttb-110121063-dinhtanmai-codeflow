@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { TYPE_COURSE } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetComments from '@/hooks/query-hooks/Course/useQ_Course_GetComments';
 import useQ_Course_GetDetail from '@/hooks/query-hooks/Course/useQ_Course_GetDetail';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
@@ -40,6 +40,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import CoursesSummary from './CoursesSummary';
 import Courses_Topics from './CoursesTopics';
+import { IMAGES } from '@/data/images';
 
 export default function CoursesDetail() {
   const params = useParams();
@@ -81,15 +82,15 @@ export default function CoursesDetail() {
 
   const courseType = TYPE_COURSE.find(item => item.value === dataCourse.data?.type);
   const isOwner = user?.id === dataCourse.data?.author?.id;
-  
+
   // Sử dụng hàm utils để xác định trạng thái khóa học
   const courseStatus = util_get_course_status(
     dataCourse?.data?.startDate ?? '',
     dataCourse?.data?.endDate ?? '',
     dataCourse?.data?.regStartDate,
-    dataCourse?.data?.regEndDate
+    dataCourse?.data?.regEndDate,
   );
-  
+
   const hasStarted = courseStatus === 'started' || courseStatus === 'finished';
   const isRegistrationOpen = courseStatus === 'registering';
 
@@ -120,7 +121,7 @@ export default function CoursesDetail() {
                   variant="ghost"
                   size="sm"
                   className="text-white hover:bg-white/20"
-                  onClick={() => router.push(localPath(paths.COURSE_UPDATE(id)))}
+                  onClick={() => router.push(localPath(Paths.COURSE_UPDATE(id)))}
                 >
                   <IconPencil className="size-5" />
                 </Button>
@@ -149,7 +150,7 @@ export default function CoursesDetail() {
                     alt={dataCourse.data?.title}
                     width={56}
                     height={56}
-                    defaultSrc={apiConfig.avatar(dataCourse.data?.author?.name ?? 'c')}
+                    defaultSrc={IMAGES.DEFAULT_AVATAR.src}
                   />
                   <div>
                     <p className="font-semibold text-lg">{dataCourse.data?.author?.name}</p>

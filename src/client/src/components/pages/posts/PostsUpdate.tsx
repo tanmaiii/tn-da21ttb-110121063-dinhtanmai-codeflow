@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Post_GetDetail from '@/hooks/query-hooks/Post/useQ_Post_GetDetail';
 import useQ_Tag_GetAll from '@/hooks/query-hooks/Tag/useQ_Tag_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
@@ -85,7 +85,7 @@ export default function PostsUpdate() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['posts', 'detail', id] });
       reset();
-      router.push(localPath(paths.POSTS));
+      router.push(localPath(Paths.POSTS));
       toast.success('Post created successfully');
     },
   });
@@ -98,7 +98,7 @@ export default function PostsUpdate() {
       user?.user?.role !== 'admin'
     ) {
       toast.error('You are not authorized to update this post');
-      router.push(localPath(paths.POSTS));
+      router.push(localPath(Paths.POSTS));
     }
   }, [user, Q_Post, localPath, router]);
 
@@ -172,7 +172,7 @@ export default function PostsUpdate() {
             <Button
               variant={'outline'}
               type="button"
-              onClick={() => router.push(localPath(paths.POSTS))}
+              onClick={() => router.push(localPath(Paths.POSTS))}
             >
               {t('cancel')}
             </Button>

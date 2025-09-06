@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Post_CheckLike from '@/hooks/query-hooks/Post/useQ_Post_CheckLike';
 import useQ_Post_GetComments from '@/hooks/query-hooks/Post/useQ_Post_GetComments';
 import useQ_Post_GetDetail from '@/hooks/query-hooks/Post/useQ_Post_GetDetail';
@@ -123,7 +123,7 @@ export default function PostDetail({
                 size="icon"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    window.location.origin + localPath(paths.POSTS + '/' + postId),
+                    window.location.origin + localPath(Paths.POSTS + '/' + postId),
                   );
                   toast.success('Copied to clipboard');
                 }}
@@ -173,7 +173,7 @@ export default function PostDetail({
                 alt={PostData?.data?.author?.name || 'Author'}
                 width={64}
                 height={64}
-                defaultSrc={apiConfig.avatar(PostData?.data?.author?.name ?? 'c')}
+                defaultSrc={IMAGES.DEFAULT_AVATAR.src}
               />
             </div>
             <div>

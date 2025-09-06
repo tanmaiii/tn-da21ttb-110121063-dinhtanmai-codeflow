@@ -5,7 +5,7 @@ import NoData from '@/components/common/NoData/NoData';
 import { TopicListSkeleton } from '@/components/skeletons/topic';
 import TextHeading from '@/components/ui/text';
 import { ROLE } from '@/constants/enum';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAllByTeacherId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByTeacherId';
 import useQ_Topic_GetAllByUserId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByUserId';
 import { ITopic } from '@/interfaces/topic';
@@ -81,11 +81,11 @@ export default function Topics() {
 
   // Navigation handlers
   const handleTabChange = (tabId: TabId) => {
-    router.push(`${paths.TOPICS}?page=1&tab=${tabId}`);
+    router.push(`${Paths.TOPICS}?page=1&tab=${tabId}`);
   };
 
   const handlePageChange = (page: number) => {
-    router.push(`${paths.TOPICS}?page=${page}&tab=${currentTab}`);
+    router.push(`${Paths.TOPICS}?page=${page}&tab=${currentTab}`);
   };
 
   // Early return for error state

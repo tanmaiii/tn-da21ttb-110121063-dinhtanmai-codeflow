@@ -4,7 +4,7 @@ import PasswordInput from '@/components/common/Input/PasswordInput/PasswordInput
 import TextInput from '@/components/common/Input/TextInput/TextInput';
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { useRouter } from '@/i18n/navigation';
 import { RegisterSchemaType, useRegisterSchema } from '@/lib/validations/registerSchema';
@@ -48,7 +48,7 @@ export default function Register() {
       toast.success(t('signUpSuccess'), {
         action: {
           label: t('signIn'),
-          onClick: () => router.push(localPath(paths.LOGIN)),
+          onClick: () => router.push(localPath(Paths.LOGIN)),
         },
       });
       isLoading[1](false);
@@ -87,7 +87,7 @@ export default function Register() {
         />
 
         <div className="flex items-center justify-end mt-2">
-          <Link className="flex items-center justify-end" href={localPath(paths.FORGOT_PASSWORD)}>
+          <Link className="flex items-center justify-end" href={localPath(Paths.FORGOT_PASSWORD)}>
             <TextDescription className="text-sm text-primary hover:text-primary/80 cursor-pointer">
               {t('forgotPassword')}
             </TextDescription>
@@ -96,7 +96,7 @@ export default function Register() {
 
         <Button
           disabled={isSubmitting}
-          onClick={() => localPath(paths.REGISTER)}
+          onClick={() => localPath(Paths.REGISTER)}
           className="w-full h-12  bg-primary text-white hover:bg-primary/80"
         >
           {isLoading[0] ? <IconLoading className="bg-white" /> : t('signUp')}
@@ -107,7 +107,7 @@ export default function Register() {
         <TextDescription className=" text-gray-500 dark:text-gray-400">
           {t('youHaveAnAccount')}
         </TextDescription>
-        <Link href={localPath(paths.LOGIN)}>
+        <Link href={localPath(Paths.LOGIN)}>
           <TextDescription className="text-primary hover:text-primary/80 cursor-pointer ml-1">
             {t('signIn')}
           </TextDescription>

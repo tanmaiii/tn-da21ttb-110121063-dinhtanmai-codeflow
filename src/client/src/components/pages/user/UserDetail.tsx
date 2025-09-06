@@ -2,7 +2,8 @@ import ActionIcon from '@/components/common/Action/ActionIcon';
 import MyImage from '@/components/common/MyImage';
 import { Button } from '@/components/ui/button';
 import TextHeading, { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { IMAGES } from '@/data/images';
+import { Paths } from '@/data/path';
 import useQ_GitHub_GetUserInfo from '@/hooks/query-hooks/Github/useQ_GitHub_GetUserInfo';
 import { IUser } from '@/interfaces/user';
 import apiConfig from '@/lib/api';
@@ -25,7 +26,7 @@ export default function UserDetail({ user }: { user: IUser }) {
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-2">
           <TextHeading className="text-2xl font-bold">Profile</TextHeading>
-          <ActionIcon actionType={'update'} onClick={() => router.push(paths.SETTINGS)} />
+          <ActionIcon actionType={'update'} onClick={() => router.push(Paths.SETTINGS)} />
         </div>
         <div className="flex items-center gap-2 bg-background-1 rounded-xl w-full">
           <div className="flex items-center gap-2 w-[120px] h-[120px] justify-center">
@@ -35,7 +36,7 @@ export default function UserDetail({ user }: { user: IUser }) {
               width={100}
               height={100}
               className="object-cover w-full h-full circle rounded-xl"
-              defaultSrc={apiConfig.avatar(user?.name)}
+              defaultSrc={IMAGES.DEFAULT_AVATAR.src}
             />
           </div>
         </div>

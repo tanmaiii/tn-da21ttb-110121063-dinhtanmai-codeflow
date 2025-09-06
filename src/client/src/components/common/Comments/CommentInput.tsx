@@ -9,10 +9,11 @@ import { useTranslations } from 'next-intl';
 import { useRef, useState } from 'react';
 import SectionDivider from '../SectionDivider/SectionDivider';
 import MyEmojiPicker from './MyEmojiPicker';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { useRouter } from 'next/navigation';
 import MyImage from '../MyImage';
-  
+import { IMAGES } from '@/data/images';
+
 interface CommentInputProps {
   onSubmit: (comment: string) => void;
   turnOff: () => void;
@@ -31,7 +32,7 @@ export default function CommentInput({
   const t = useTranslations('comment');
   const { user } = useUserStore();
   const router = useRouter();
-  
+
   const MAX_CHARS = 200;
   const isOverLimit = keyword.length > MAX_CHARS;
   function handleEmojiClick(emoji: string) {
@@ -48,13 +49,15 @@ export default function CommentInput({
     }
   }
 
-  if(!user){
+  if (!user) {
     return (
       <div className="flex flex-col w-full bg-input/20 border rounded-lg p-4 gap-3">
-          <TextDescription>Vui lòng đăng nhập để bình luận</TextDescription>
-          <Button variant="default" onClick={() => router.push(paths.LOGIN)}>Đăng nhập</Button>
+        <TextDescription>Vui lòng đăng nhập để bình luận</TextDescription>
+        <Button variant="default" onClick={() => router.push(Paths.LOGIN)}>
+          Đăng nhập
+        </Button>
       </div>
-    )
+    );
   }
 
   return (
@@ -81,7 +84,7 @@ export default function CommentInput({
             width={40}
             height={40}
             className="w-full h-full object-cover rounded-lg"
-            defaultSrc={apiConfig.avatar(user?.name ?? 'c')}
+            defaultSrc={IMAGES.DEFAULT_AVATAR.src}
           />
         </div>
         <Textarea
@@ -89,7 +92,9 @@ export default function CommentInput({
           value={keyword}
           onChange={e => setKeyword(e.target.value)}
           placeholder={t('placeholder')}
-          className={`border-none focus-visible:ring-0 shadow-none min-h-[100px] ${isOverLimit ? 'border-red-500' : ''}`}
+          className={`border-none focus-visible:ring-0 shadow-none min-h-[100px] ${
+            isOverLimit ? 'border-red-500' : ''
+          }`}
         />
       </div>
 
@@ -100,12 +105,14 @@ export default function CommentInput({
           <div className="relative">
             <MyEmojiPicker onSelect={handleEmojiClick} />
           </div>
-          <TextDescription className={`text-sm ${isOverLimit ? 'text-red-500' : 'text-muted-foreground'}`}>
+          <TextDescription
+            className={`text-sm ${isOverLimit ? 'text-red-500' : 'text-muted-foreground'}`}
+          >
             {keyword.length}/{MAX_CHARS}
           </TextDescription>
         </div>
-        <Button 
-          variant={'default'} 
+        <Button
+          variant={'default'}
           onClick={() => onSubmit(keyword)}
           disabled={isOverLimit || keyword.trim().length === 0}
         >

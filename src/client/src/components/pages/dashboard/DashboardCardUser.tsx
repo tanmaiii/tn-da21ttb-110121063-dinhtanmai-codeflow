@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import TextHeading from '@/components/ui/text';
 import { ROLE } from '@/constants/enum';
 import { ROLE_USER } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import apiConfig from '@/lib/api';
 import tokenService from '@/services/token.service';
 import { useUserStore } from '@/stores/user_store';
@@ -149,7 +149,7 @@ export default function DashboardCardUser() {
           <Button
             variant="ghost"
             className="w-full justify-start hover:bg-blue-50 hover:text-blue-700 transition-colors"
-            onClick={() => router.push(paths.COURSES)}
+            onClick={() => router.push(Paths.COURSES)}
           >
             <IconBook className="w-4 h-4 mr-3" />
             {tDashboard('courses')}
@@ -158,7 +158,7 @@ export default function DashboardCardUser() {
           <Button
             variant="ghost"
             className="w-full justify-start hover:bg-blue-50 hover:text-blue-700 transition-colors"
-            onClick={() => router.push(paths.NOTIFICATION)}
+            onClick={() => router.push(Paths.NOTIFICATION)}
           >
             <IconBell className="w-4 h-4 mr-3" />
             {tDashboard('notifications')}
@@ -170,7 +170,7 @@ export default function DashboardCardUser() {
               <Button
                 variant="ghost"
                 className="w-full justify-start hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
-                onClick={() => router.push(paths.TOPICS)}
+                onClick={() => router.push(Paths.TOPICS)}
               >
                 <IconChalkboard className="w-4 h-4 mr-3" />
                 {tDashboard('manageTopics')}
@@ -179,7 +179,7 @@ export default function DashboardCardUser() {
               <Button
                 variant="ghost"
                 className="w-full justify-start hover:bg-indigo-50 hover:text-indigo-700 transition-colors"
-                onClick={() => router.push(paths.COURSE_CREATE)}
+                onClick={() => router.push(Paths.COURSE_CREATE)}
               >
                 <IconCalendar className="w-4 h-4 mr-3" />
                 {tDashboard('createCourse')}
@@ -192,7 +192,7 @@ export default function DashboardCardUser() {
             <Button
               variant="ghost"
               className="w-full justify-start hover:bg-red-50 hover:text-red-700 transition-colors"
-              onClick={() => router.push(paths.USERS)}
+              onClick={() => router.push(Paths.USERS)}
             >
               <IconSettings className="w-4 h-4 mr-3" />
               {tDashboard('manageUsers')}

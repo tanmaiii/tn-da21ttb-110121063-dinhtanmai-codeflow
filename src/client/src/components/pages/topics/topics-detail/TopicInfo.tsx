@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import TextHeading from '@/components/ui/text';
 import { STATUS_TOPIC } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ITopic } from '@/interfaces/topic';
 import { useUserStore } from '@/stores/user_store';
 import { utils_DateToDDMMYYYY } from '@/utils/date';
@@ -34,7 +34,7 @@ export default function TopicInfo({ topic }: { topic: ITopic }) {
         {isLeader && (
           <ActionIcon
             actionType="update"
-            onClick={() => router.push(paths.TOPIC_UPDATE(topic.id))}
+            onClick={() => router.push(Paths.TOPIC_UPDATE(topic.id))}
           />
         )}
       </div>

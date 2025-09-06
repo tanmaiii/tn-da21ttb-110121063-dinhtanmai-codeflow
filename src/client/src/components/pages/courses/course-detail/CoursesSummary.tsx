@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetMembers from '@/hooks/query-hooks/Course/useQ_Course_GetMembers';
 import useQ_Topic_GetAllByCourseId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByCourseId';
 import { ICourse } from '@/interfaces/course';
@@ -97,7 +97,7 @@ export default function CoursesSummary({ course }: { course: ICourse }) {
             </div>
 
             <Link
-              href={isOwner ? paths.COURSE_MEMBER(course.id) : ''}
+              href={isOwner ?Paths.COURSE_MEMBER(course.id) : ''}
               className="text-center p-3 rounded-xl bg-gradient-to-br from-emerald-50 to-emerald-100/80 border border-emerald-200/50 dark:from-emerald-900/30 dark:to-emerald-800/20 dark:border-emerald-700/30 hover:shadow-md transition-all duration-200 hover:scale-105"
             >
               <div className="flex justify-center mb-2">
@@ -114,7 +114,7 @@ export default function CoursesSummary({ course }: { course: ICourse }) {
             </Link>
 
             <Link
-              href={isOwner ? paths.COURSE_TOPICS(course.id) : ''}
+              href={isOwner ?Paths.COURSE_TOPICS(course.id) : ''}
               className="text-center p-3 rounded-xl bg-gradient-to-br from-purple-50 to-purple-100/80 border border-purple-200/50 dark:from-purple-900/30 dark:to-purple-800/20 dark:border-purple-700/30 hover:shadow-md transition-all duration-200 hover:scale-105"
             >
               <div className="flex justify-center mb-2">
@@ -136,7 +136,7 @@ export default function CoursesSummary({ course }: { course: ICourse }) {
             {isOwner && (
               <Button
                 className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
-                onClick={() => router.push(paths.COURSE_TOPICS(course.id))}
+                onClick={() => router.push(Paths.COURSE_TOPICS(course.id))}
               >
                 <IconTrendingUp className="size-4 mr-2" />
                 {t('topics')}
@@ -147,7 +147,7 @@ export default function CoursesSummary({ course }: { course: ICourse }) {
             {isOwner && (
               <Button
                 className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 dark:from-purple-500 dark:to-purple-600 dark:hover:from-purple-600 dark:hover:to-purple-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
-                onClick={() => router.push(paths.COURSE_DASHBOARD(course.id))}
+                onClick={() => router.push(Paths.COURSE_DASHBOARD(course.id))}
               >
                 <IconChartBar className="size-4 mr-2" />
                 {'Dashboard'}
@@ -165,7 +165,7 @@ export default function CoursesSummary({ course }: { course: ICourse }) {
               !isOwner && (
                 <Button
                   className="w-full bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 dark:from-emerald-500 dark:to-emerald-600 dark:hover:from-emerald-600 dark:hover:to-emerald-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
-                  onClick={() => router.push(paths.COURSE_REGISTER(course.id))}
+                  onClick={() => router.push(Paths.COURSE_REGISTER(course.id))}
                 >
                   <IconAward className="size-4 mr-2" />
                   {t('register')}

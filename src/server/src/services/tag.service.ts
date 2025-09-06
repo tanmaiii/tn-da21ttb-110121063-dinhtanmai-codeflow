@@ -144,7 +144,7 @@ export class TagService {
           DB.sequelize.literal(`(
             SELECT COUNT(DISTINCT ct.course_id) 
             FROM course_tags ct 
-            WHERE ct.tag_id = Tags.id
+            WHERE ct.tag_id = tags.id
           )`),
           'coursesCount',
         ],
@@ -152,7 +152,7 @@ export class TagService {
           DB.sequelize.literal(`(
             SELECT COUNT(DISTINCT pt.post_id) 
             FROM post_tags pt 
-            WHERE pt.tag_id = Tags.id
+            WHERE pt.tag_id = tags.id
           )`),
           'postsCount',
         ],

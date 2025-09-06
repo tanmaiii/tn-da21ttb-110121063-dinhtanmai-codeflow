@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { EllipsisIcon, PenIcon } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import MoreDropdown, { DropdownAction } from '../MoreDropdown';
 import { Button } from '@/components/ui/button';
@@ -24,11 +24,11 @@ export default function CardCourse_More({ course, className }: CardCourse_MorePr
   const t = useTranslations('course');
 
   const onView = () => {
-    router.push(localPath(paths.COURSES + '/' + course.id));
+    router.push(localPath(Paths.COURSES + '/' + course.id));
   };
 
   const onUpdate = () => {
-    router.push(localPath(paths.COURSE_UPDATE(course.id)));
+    router.push(localPath(Paths.COURSE_UPDATE(course.id)));
   };
 
   const mutationDelete = useMutation({

@@ -24,7 +24,7 @@ import DataExport from '@/components/common/DataTable/data-export';
 import MyBadge from '@/components/common/MyBadge';
 import { MyPagination } from '@/components/common/MyPagination/MyPagination';
 import MySelect from '@/components/common/MySelect';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { useUserStore } from '@/stores/user_store';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -61,7 +61,7 @@ export default function TopicsTable() {
         header: ({ column }) => <DataTableColumnHeader column={column} title={t('title')} />,
         accessorKey: 'title',
         cell: ({ row }) => (
-          <Link href={`${paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
+          <Link href={`${Paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
         ),
         size: 200,
       },
@@ -224,7 +224,7 @@ export default function TopicsTable() {
           <div className="flex justify-center">
             <ActionIcon
               actionType={'view'}
-              onClick={() => router.push(`${paths.TOPICS_DETAIL(row.original.id)}`)}
+              onClick={() => router.push(`${Paths.TOPICS_DETAIL(row.original.id)}`)}
               type="button"
             />
             <CourseTopicsUpdate topic={row.original} />

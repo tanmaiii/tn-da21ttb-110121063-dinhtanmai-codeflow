@@ -1,5 +1,5 @@
 import TextHeading from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { IRepos } from '@/interfaces/repos';
 import { IconBrandGithub, IconCloudX } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
@@ -8,7 +8,7 @@ import CardRepo_More from './CardRepoMore';
 export default function CardRepo({ repos }: { repos: IRepos }) {
   const router = useRouter();
   const onClick = () => {
-    router.push(paths.REPOS_DETAIL(repos.id));
+    router.push(Paths.REPOS_DETAIL(repos.id));
   };
 
   return (

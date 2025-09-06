@@ -5,7 +5,7 @@ import { IMAGES } from '@/data/images';
 import useQ_Post_GetAll from '@/hooks/query-hooks/Post/useQ_Post_GetAll';
 import apiConfig from '@/lib/api';
 import { useRouter } from 'next/navigation';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { useParams } from 'next/navigation';
 import { TrendingUpIcon, ClockIcon } from 'lucide-react';
 import { utils_TimeAgo } from '@/utils/date';
@@ -82,7 +82,7 @@ export default function PostDetailMore() {
               key={post.id}
               className="cursor-pointer transition-all duration-300 hover:bg-primary/10 rounded-md p-2"
               onClick={() => {
-                router.push(paths.POSTS + '/' + post.id);
+                router.push(Paths.POSTS + '/' + post.id);
               }}
             >
               <div className="flex gap-2">

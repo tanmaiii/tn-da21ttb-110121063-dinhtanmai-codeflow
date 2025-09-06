@@ -42,7 +42,7 @@ export class CodeAnalysisService {
       offset: (page - 1) * pageSize,
       order: [[sortBy, sortOrder]],
       distinct: true,
-      col: 'codeAnalysis.id',
+      col: 'CodeAnalysis.id',
     });
   }
 
@@ -69,7 +69,7 @@ export class CodeAnalysisService {
       order: [[sortBy, sortOrder]],
       limit: pageSize,
       distinct: true,
-      col: 'codeAnalysis.id',
+      col: 'CodeAnalysis.id',
       offset,
     });
   }

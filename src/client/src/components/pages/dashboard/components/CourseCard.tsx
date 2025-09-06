@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ICourse } from '@/interfaces/course';
 import { util_remove_html_tags } from '@/utils/common';
 import {
@@ -35,7 +35,7 @@ export default function CourseCard({
   return (
     <Card
       className="group p-0 cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
-      onClick={() => router.push(paths.COURSES_DETAIL(course.id))}
+      onClick={() => router.push(Paths.COURSES_DETAIL(course.id))}
     >
       <div className={`h-2 bg-gradient-to-r ${gradientColor}`}></div>
       <CardContent className="p-6 gap-2 flex flex-col">
@@ -87,7 +87,7 @@ export default function CourseCard({
               className="flex-1 text-xs hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700"
               onClick={e => {
                 e.stopPropagation();
-                router.push(paths.COURSE_TOPICS(course.id));
+                router.push(Paths.COURSE_TOPICS(course.id));
               }}
             >
               <IconChalkboard className="w-3 h-3 mr-1" />
@@ -99,7 +99,7 @@ export default function CourseCard({
               className="flex-1 text-xs hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700"
               onClick={e => {
                 e.stopPropagation();
-                router.push(paths.COURSE_MEMBER(course.id));
+                router.push(Paths.COURSE_MEMBER(course.id));
               }}
             >
               <IconUsers className="w-3 h-3 mr-1" />

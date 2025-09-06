@@ -1,4 +1,4 @@
-export const paths = {
+export const Paths = {
   ADMIN: '/admin',
 
   HOME: '/',
@@ -13,7 +13,7 @@ export const paths = {
 
   REPOS: '/repos',
   REPOS_DETAIL: (id: string) => `/repos/${id}`,
-  
+
   TOPICS: '/topics',
   TOPICS_DETAIL: (id: string) => `/topics/${id}`,
   TOPIC_CREATE: '/topics/create',

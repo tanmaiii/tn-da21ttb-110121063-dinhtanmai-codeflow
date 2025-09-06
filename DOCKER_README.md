@@ -1,122 +1,125 @@
-# 🐳 Docker cho CodeFlow
+# Docker Setup & Troubleshooting Guide
 
-Cấu hình Docker đơn giản cho dự án CodeFlow.
-
-## 🚀 Cài đặt nhanh
-
-### 1. Thiết lập
-```bash
-# Copy environment file
-cp .env.example .env
-
-# Chỉnh sửa .env theo nhu cầu
-# vim .env
-
-# Build và start
-docker-compose up -d
-```
-
-### 2. Truy cập ứng dụng
-- **Frontend**: http://localhost:3002
-- **Backend API**: http://localhost:3001  
-- **Database**: localhost:3306
-- **Redis**: localhost:6379
-
-## 🛠️ Lệnh cơ bản
+## 🚀 Khởi động ứng dụng
 
 ```bash
-# Start
+# Khởi động tất cả services
 docker-compose up -d
 
-# Stop  
-docker-compose down
-
-# Xem logs
-docker-compose logs -f
-
-# Rebuild
-docker-compose build --no-cache
-docker-compose up -d
+# Hoặc build và khởi động
+docker-compose up --build -d
 ```
 
-## 📁 Cấu trúc
+## 🔧 Khắc phục vấn đề hiển thị hình ảnh
+
+### Vấn đề thường gặp:
+- Hình ảnh không hiển thị từ API backend
+- Lỗi CORS khi truy cập static files
+- Environment variables không đúng
+
+### Giải pháp nhanh:
+
+#### Sử dụng script tự động:
+```bash
+# Linux/Mac
+chmod +x scripts/fix-docker-images.sh
+./scripts/fix-docker-images.sh
+
+# Windows PowerShell
+.\scripts\fix-docker-images.ps1
+```
+
+#### Khắc phục thủ công:
+
+1. **Cập nhật environment variables:**
+   ```bash
+   # Tạo file .env từ env.example
+   cp env.example .env
+   
+   # Cập nhật NEXT_PUBLIC_API_URL
+   # Thay đổi từ: http://localhost:3001
+   # Thành: http://backend:3001
+   ```
+
+2. **Rebuild containers:**
+   ```bash
+   docker-compose down
+   docker-compose up --build -d
+   ```
+
+3. **Kiểm tra logs:**
+   ```bash
+   # Backend logs
+   docker-compose logs backend -f
+   
+   # Frontend logs
+   docker-compose logs frontend -f
+   ```
+
+## 📁 Cấu trúc volumes
 
 ```
-codeflow/
-├── docker-compose.yml      # Docker services
-├── .env.example           # Environment template
-├── scripts/
-│   ├── docker-setup.sh    # Setup script
-│   └── docker-prod.sh     # Management script
-└── src/
-    ├── client/Dockerfile  # Frontend image
-    └── server/Dockerfile  # Backend image
+volumes:
+  backend_uploads:    # Chứa files upload từ backend
+  backend_logs:       # Log files của backend
+  mysql_data:         # Database data
+  redis_data:         # Redis cache data
 ```
 
-## ⚙️ Scripts (Linux/macOS)
+## 🌐 Network Configuration
+
+- **Frontend**: `http://localhost:3002`
+- **Backend**: `http://localhost:3001` (external), `http://backend:3001` (internal)
+- **Database**: `mysql:3306` (internal)
+- **Redis**: `redis:6379` (internal)
+
+## 🔍 Debug Commands
 
 ```bash
-# Setup
-./scripts/docker-setup.sh
-
-# Management
-./scripts/docker-prod.sh start    # Start
-./scripts/docker-prod.sh stop     # Stop
-./scripts/docker-prod.sh restart  # Restart
-./scripts/docker-prod.sh rebuild  # Rebuild
-./scripts/docker-prod.sh status   # Status
-./scripts/docker-prod.sh logs     # Logs
-```
-
-## 🔧 Environment (.env)
-
-```env
-# Environment
-NODE_ENV=production
-
-# Database
-DB_ROOT_PASSWORD=your_password
-DB_DATABASE=codeflow
-DB_USER=codeflow_user
-DB_PASSWORD=your_password
-
-# Ports
-BACKEND_PORT=3001
-FRONTEND_PORT=3002
-
-# URLs
-NEXT_PUBLIC_API_URL=http://localhost:3001
-ORIGIN=http://localhost:3002
-```
-
-## 🔄 Development Mode
-
-Chỉ cần đặt `NODE_ENV=development` trong .env
-
-## 📝 Services
-
-- **mysql**: MySQL 8.0 database
-- **backend**: Node.js Express API  
-- **frontend**: Next.js application
-- **redis**: Redis cache
-
-## 🐛 Troubleshooting
-
-```bash
-# Kiểm tra containers
+# Kiểm tra trạng thái containers
 docker-compose ps
 
-# Xem logs
-docker-compose logs [service_name]
+# Kiểm tra network
+docker network ls
+docker network inspect codeflow_codeflow-network
 
-# Restart service
-docker-compose restart [service_name]
+# Kiểm tra volumes
+docker volume ls
+docker volume inspect codeflow_backend_uploads
 
-# Clean rebuild
-docker-compose down
-docker system prune -a
-docker-compose build --no-cache
-docker-compose up -d
+# Truy cập container
+docker exec -it codeflow-backend sh
+docker exec -it codeflow-frontend sh
+
+# Kiểm tra logs real-time
+docker-compose logs -f
 ```
 
-Đó là tất cả! 🎉
+## 📝 Environment Variables Quan trọng
+
+```bash
+# Frontend
+NEXT_PUBLIC_API_URL=http://backend:3001  # Quan trọng cho Docker!
+
+# Backend
+DB_HOST=mysql
+DB_PORT=3306
+PORT=3001
+```
+
+## 🚨 Troubleshooting Checklist
+
+- [ ] File `.env` đã được tạo và cập nhật
+- [ ] `NEXT_PUBLIC_API_URL` trỏ đến `http://backend:3001`
+- [ ] Tất cả containers đang chạy (`docker-compose ps`)
+- [ ] Backend có thể truy cập database
+- [ ] Frontend có thể kết nối backend qua internal network
+- [ ] Static files được serve đúng cách từ backend
+
+## 📞 Hỗ trợ
+
+Nếu vẫn gặp vấn đề, hãy:
+1. Chạy script khắc phục tự động
+2. Kiểm tra logs chi tiết
+3. Xác nhận network configuration
+4. Kiểm tra environment variables

@@ -2,7 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { STATUS_TOPIC } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ITopic } from '@/interfaces/topic';
 import apiConfig from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -21,7 +21,7 @@ interface CardTopicProps {
 export default function CardTopic({ topic }: CardTopicProps) {
   const router = useRouter();
   const onClick = () => {
-    router.push(paths.TOPICS_DETAIL(topic.id));
+    router.push(Paths.TOPICS_DETAIL(topic.id));
   };
 
   // Tính toán progress và màu sắc

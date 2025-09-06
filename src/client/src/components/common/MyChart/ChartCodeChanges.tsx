@@ -1,6 +1,7 @@
 import TextHeading from '@/components/ui/text';
 import { useDarkMode } from '@/hooks';
 import { IMemberContributors } from '@/interfaces/user';
+import { util_format_number_compact } from '@/utils/common';
 import ReactECharts from 'echarts-for-react';
 import { ChartArea } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -29,14 +30,13 @@ export default function ChartCodeChanges({
       formatter: (
         params: Array<{ axisValue: string; marker: string; seriesName: string; value: number }>,
       ) => {
-        const additions = params.find(p => p.seriesName === 'Thêm')?.value || 0;
-        const deletions = Math.abs(params.find(p => p.seriesName === 'Xóa')?.value || 0);
+        const additions = params.find(p => p.seriesName === t('add'))?.value || 0;
+        const deletions = Math.abs(params.find(p => p.seriesName === t('delete'))?.value || 0);
+        const total = additions + deletions;
         return `<strong>${params[0]?.axisValue || ''}</strong><br/>
-                <span style="color: #10b981;">+ ${additions} ${t('add')}</span><br/>
-                <span style="color: #ef4444;">- ${deletions} ${t('delete')}</span><br/>
-                <span style="color: ${theme.textColor};">${t('total')}: ${
-          additions + deletions
-        }</span>`;
+                <span style="color: #10b981;">+ ${util_format_number_compact(additions)} ${t('add')}</span><br/>
+                <span style="color: #ef4444;">- ${util_format_number_compact(deletions)} ${t('delete')}</span><br/>
+                <span style="color: ${theme.textColor};">${t('total')}: ${util_format_number_compact(total)}</span>`;
       },
       backgroundColor: theme.backgroundColor,
       textStyle: { color: theme.textColor },
@@ -113,6 +113,8 @@ export default function ChartCodeChanges({
       },
     ],
   };
+
+  if(!contributors) return <></>
 
   return (
     <div className="gap-0 border rounded-lg p-4">

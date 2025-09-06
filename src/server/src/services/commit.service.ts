@@ -69,9 +69,9 @@ export class CommitService {
       where: whereCondition,
       attributes: [
         authorId ? 'authorId' : 'reposId',
-        [sequelize.fn('COUNT', sequelize.col('Commits.id')), 'totalCommits'],
-        [sequelize.fn('SUM', sequelize.col('Commits.additions')), 'totalAdditions'],
-        [sequelize.fn('SUM', sequelize.col('Commits.deletions')), 'totalDeletions'],
+        [sequelize.fn('COUNT', sequelize.col('commits.id')), 'totalCommits'],
+        [sequelize.fn('SUM', sequelize.col('commits.additions')), 'totalAdditions'],
+        [sequelize.fn('SUM', sequelize.col('commits.deletions')), 'totalDeletions'],
       ],
       group: authorId ? ['authorId'] : ['reposId'],
       include: {

@@ -1,4 +1,4 @@
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { IPost } from '@/interfaces/post';
 import postService from '@/services/post.service';
@@ -24,11 +24,11 @@ export default function CardPostMore({ post, className }: CardPost_MoreProps) {
   const t = useTranslations('post');
 
   const onView = () => {
-    router.push(localPath(paths.POSTS + '/' + post.id));
+    router.push(localPath(Paths.POSTS + '/' + post.id));
   };
 
   const onUpdate = () => {
-    router.push(localPath(paths.POST_UPDATE(post.id)));
+    router.push(localPath(Paths.POST_UPDATE(post.id)));
   };
 
   const mutationDelete = useMutation({

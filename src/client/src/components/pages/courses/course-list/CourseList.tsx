@@ -7,7 +7,7 @@ import NoData from '@/components/common/NoData/NoData';
 import { CourseListSkeleton } from '@/components/skeletons/course';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { ENUM_TYPE_COURSE, ROLE } from '@/constants/enum';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetAll from '@/hooks/query-hooks/Course/useQ_Course_GetAll';
 import useQ_Course_GetAllByUser from '@/hooks/query-hooks/Course/useQ_Course_GetAllByUser';
 import useQ_Course_GetAllRegistered from '@/hooks/query-hooks/Course/useQ_Course_GetAllRegistered';
@@ -60,7 +60,7 @@ export default function CourseList() {
     tab === 'all' ? allCourses : tab === 'registered' ? registeredCourses : authorCourses;
 
   const handleTabChange = (tabId: string) => {
-    router.push(`${localPath(paths.COURSES)}?page=1&tab=${tabId}`);
+    router.push(`${localPath(Paths.COURSES)}?page=1&tab=${tabId}`);
   };
 
   const typeCourseStatus = [
@@ -111,7 +111,7 @@ export default function CourseList() {
             <ActionButton
               title={t('createCourse')}
               actionType="create"
-              onClick={() => router.push(localPath(paths.COURSE_CREATE))}
+              onClick={() => router.push(localPath(Paths.COURSE_CREATE))}
             />
           )}
         </div>
@@ -128,7 +128,7 @@ export default function CourseList() {
         <MyPagination
           currentPage={currentData.pagination.currentPage || 1}
           totalPages={currentData.pagination.totalPages || 1}
-          onPageChange={page => router.push(`${localPath(paths.COURSES)}?page=${page}&tab=${tab}`)}
+          onPageChange={page => router.push(`${localPath(Paths.COURSES)}?page=${page}&tab=${tab}`)}
         />
       </div>
     </div>

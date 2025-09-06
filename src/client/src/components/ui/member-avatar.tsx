@@ -1,6 +1,6 @@
 import { TextDescription } from '@/components/ui/text';
 import { ROLE_TOPIC } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import apiConfig from '@/lib/api';
 import { cn } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import MyImage from '../common/MyImage';
 import { useOnlineUsersStore } from '@/stores/online_users_store';
 import useQ_User_GetDetail from '@/hooks/query-hooks/User/useQ_User_GetDetail';
+import { IMAGES } from '@/data/images';
 
 interface MemberAvatarProps {
   avatar?: string;
@@ -44,7 +45,7 @@ export default function MemberAvatar({
     <div
       onClick={() => {
         if (id) {
-          router.push(paths.USER_DETAIL(id));
+          router.push(Paths.USER_DETAIL(id));
         }
       }}
       className={cn('flex flex-row cursor-pointer items-center gap-2', className)}
@@ -58,7 +59,7 @@ export default function MemberAvatar({
           minWidth={size}
           minHeight={size}
           className={`rounded-full`}
-          defaultSrc={apiConfig.avatar(name)}
+          defaultSrc={IMAGES.DEFAULT_AVATAR.src}
         />
         {isOnline && user?.data?.settings?.onlineStatus && (
           <div className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full border border-white" />

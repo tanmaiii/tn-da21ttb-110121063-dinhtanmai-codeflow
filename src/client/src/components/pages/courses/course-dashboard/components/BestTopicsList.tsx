@@ -3,7 +3,7 @@ import { MyPagination } from '@/components/common/MyPagination/MyPagination';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import MemberAvatar from '@/components/ui/member-avatar';
 import TextHeading from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAllStatsByCourseId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllStatsByCourseId';
 import { ITopicStats } from '@/interfaces/topic';
 import { IconCode, IconDashboard } from '@tabler/icons-react';
@@ -109,7 +109,7 @@ const Topic = ({ topic, index }: { topic: ITopicStats; index: number }) => {
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <Link href={paths.TOPICS_DETAIL(topic.id)}>
+              <Link href={Paths.TOPICS_DETAIL(topic.id)}>
                 <TextHeading className="font-medium" lineClamp={1}>
                   {topic.title}
                 </TextHeading>

@@ -5,7 +5,7 @@ import MyMultiSelect from '@/components/common/MyMultiSelect/MyMultiSelect';
 import TitleHeader from '@/components/layout/TitleHeader';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetMembers from '@/hooks/query-hooks/Course/useQ_Course_GetMembers';
 import useQ_Topic_GetDetail from '@/hooks/query-hooks/Topic/useQ_Topic_GetDetail';
 import { TopicSchemaType, useTopicSchema } from '@/lib/validations/topicSchema';
@@ -71,7 +71,7 @@ export default function TopicsUpdate() {
 
   useEffect(() => {
     if (Q_Topic?.data?.members?.find(member => member.role === 'leader')?.userId !== user?.id) {
-      router.push(paths.TOPICS_DETAIL(id as string));
+      router.push(Paths.TOPICS_DETAIL(id as string));
     }
   }, [Q_Topic, user?.id, router, id]);
 

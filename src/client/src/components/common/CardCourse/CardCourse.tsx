@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { TYPE_COURSE } from '@/constants/object';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ICourse } from '@/interfaces/course';
 import apiConfig from '@/lib/api';
 import courseService from '@/services/course.service';
@@ -20,6 +20,7 @@ import MyImage from '../MyImage';
 import NameTags from '../NameTags/NameTags';
 import CardCourse_More from './CardCourse_More';
 import CardCourse_Submit from './CardCourse_Submit';
+import useH_LocalPath from '@/hooks/useH_LocalPath';
 interface CardCourseProps {
   course: ICourse;
 }
@@ -29,6 +30,7 @@ export default function CardCourse({ course }: CardCourseProps) {
   const t = useTranslations();
   const { user } = useUserStore();
   const router = useRouter();
+  const { localPath } = useH_LocalPath();
 
   const { data: isJoined } = useQuery({
     queryKey: ['course', course.id, user],
@@ -64,22 +66,26 @@ export default function CardCourse({ course }: CardCourseProps) {
       </CardHeader>
       <CardContent className="min-h-[60px] px-4 flex flex-1 flex-col gap-2">
         <Link
-          href={paths.USER_DETAIL(course?.author?.id ?? '')}
+          href={`${localPath(Paths.USER_DETAIL(course?.author?.id ?? ''))}`}
           className="flex items-center gap-2"
         >
           <MyImage
-            src={course?.author?.avatar ? course?.author?.avatar : apiConfig.avatar(course?.author?.name ?? 'c')}
+            src={
+              course?.author?.avatar
+                ? course?.author?.avatar
+                : apiConfig.avatar(course?.author?.name ?? 'c')
+            }
             alt={course?.author?.avatar ?? ''}
             width={100}
             height={100}
             className="object-cover w-6 h-6 circle rounded-full"
-            defaultSrc={apiConfig.avatar(course?.author?.name ?? 'c')}
+            defaultSrc={IMAGES.DEFAULT_AVATAR.src}
           />
           <TextDescription className="text-primary line-clamp-1 ">
             {course?.author?.name}
           </TextDescription>
         </Link>
-        <Link href={paths.COURSES_DETAIL(course.id)} className="text-lg">
+        <Link href={`${localPath(Paths.COURSES_DETAIL(course.id))}`} className="text-lg">
           <TextHeading className="line-clamp-2 hover:underline">{course.title}</TextHeading>
         </Link>
         <NameTags className="mt-auto" tags={course?.tags} />
@@ -88,7 +94,7 @@ export default function CardCourse({ course }: CardCourseProps) {
         {isJoined || user?.id === course.authorId ? (
           <Button
             className="w-full dark:text-white"
-            onClick={() => router.push(paths.COURSES_DETAIL(course.id))}
+            onClick={() => router.push(`${localPath(Paths.COURSES_DETAIL(course.id))}`)}
           >
             {`${tCourse('view')}`}
           </Button>

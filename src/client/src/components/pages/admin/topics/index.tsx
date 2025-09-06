@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import MemberAvatar from '@/components/ui/member-avatar';
 import { TextDescription } from '@/components/ui/text';
 import { STATUS_TOPIC, STATUS_TOPIC_CUSTOM } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAll from '@/hooks/query-hooks/Topic/useQ_Topic_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { ITopic } from '@/interfaces/topic';
@@ -58,7 +58,7 @@ export default function Topics() {
         accessorKey: 'title',
         cell: ({ row }) => (
           <div className="flex flex-col">
-            <Link className="text-base" href={localPath(paths.TOPICS_DETAIL(row.original.id))}>
+            <Link className="text-base" href={localPath(Paths.TOPICS_DETAIL(row.original.id))}>
               <TextDescription lineClamp={2} className="text-color-1">
                 {row.original.title}
               </TextDescription>
@@ -175,7 +175,7 @@ export default function Topics() {
     return (
       <>
         <Button
-          onClick={() => router.push(`/admin/${paths.TOPIC_CREATE}`)}
+          onClick={() => router.push(`/admin/${Paths.TOPIC_CREATE}`)}
           variant="outline"
           size="sm"
           className="w-fit"
@@ -223,7 +223,7 @@ export default function Topics() {
             <div className="flex">
               <ActionIcon
                 actionType="view"
-                onClick={() => router.push(paths.TOPICS_DETAIL(topic.id))}
+                onClick={() => router.push(Paths.TOPICS_DETAIL(topic.id))}
                 type="button"
               />
 
@@ -237,7 +237,7 @@ export default function Topics() {
               ) : (
                 <ActionIcon
                   actionType="update"
-                  onClick={() => router.push(`/admin/${paths.TOPIC_UPDATE(topic.id)}`)}
+                  onClick={() => router.push(`/admin/${Paths.TOPIC_UPDATE(topic.id)}`)}
                   type="button"
                 />
               )}

@@ -2,7 +2,7 @@
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import authService from '@/services/auth.service';
 import tokenService from '@/services/token.service';
@@ -44,14 +44,14 @@ export default function JoinOrganization() {
           clearInterval(intervalRef.current!);
           tokenService.accessToken = token;
           setUser(res.data);
-          router.push(paths.HOME);
+          router.push(Paths.HOME);
         } else {
           setAttempts(prev => prev + 1);
         }
       } catch (error) {
         console.error(error);
         clearInterval(intervalRef.current!);
-        router.push(paths.LOGIN);
+        router.push(Paths.LOGIN);
       } finally {
         setChecking(false);
       }
@@ -101,7 +101,7 @@ export default function JoinOrganization() {
             Or
           </TextDescription>
         </div>
-        <Link href={localPath(paths.LOGIN)}>
+        <Link href={localPath(Paths.LOGIN)}>
           <TextDescription className="text-primary hover:text-primary/80 cursor-pointer ml-1">
             {t('signIn')}
           </TextDescription>

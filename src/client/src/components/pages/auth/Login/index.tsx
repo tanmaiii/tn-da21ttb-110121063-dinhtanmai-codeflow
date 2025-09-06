@@ -5,7 +5,7 @@ import TextInput from '@/components/common/Input/TextInput/TextInput';
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
 import { ROLE } from '@/constants/enum';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { } from '@/hooks/ussH_Toast';
 import { loginSchemaType, useLoginSchema } from '@/lib/validations/loginSchema';
@@ -53,9 +53,9 @@ export default function Login() {
       tokenService.accessToken = data.accessToken.token;
       setUser(data.data);
       if (data.data.role === ROLE.ADMIN) {
-        router.push(localPath(paths.ADMIN));
+        router.push(localPath(Paths.ADMIN));
       } else {
-        router.push(localPath(paths.HOME));
+        router.push(localPath(Paths.HOME));
       }
       isLoading[1](false);
     },
@@ -92,7 +92,7 @@ export default function Login() {
         />
 
         <div className="flex items-center justify-end mt-2">
-          <Link className="flex items-center justify-end" href={localPath(paths.FORGOT_PASSWORD)}>
+          <Link className="flex items-center justify-end" href={localPath(Paths.FORGOT_PASSWORD)}>
             <TextDescription className="text-sm text-primary hover:text-primary/80 cursor-pointer">
               {t('forgotPassword')}
             </TextDescription>
@@ -101,7 +101,7 @@ export default function Login() {
 
         <Button
           disabled={isSubmitting}
-          onClick={() => localPath(paths.REGISTER)}
+          onClick={() => localPath(Paths.REGISTER)}
           className="w-full h-12 bg-primary text-white hover:bg-primary/80"
         >
           {isLoading[0] ? <IconLoading className="bg-white" /> : t('signIn')}
@@ -112,7 +112,7 @@ export default function Login() {
         <TextDescription className=" text-gray-500 dark:text-gray-400">
           {t('dontHaveAnAccount')}
         </TextDescription>
-        <Link href={localPath(paths.REGISTER)}>
+        <Link href={localPath(Paths.REGISTER)}>
           <TextDescription className="text-primary hover:text-primary/80 cursor-pointer ml-1">
             {t('signUp')}
           </TextDescription>

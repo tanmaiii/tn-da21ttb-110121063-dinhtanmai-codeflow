@@ -20,6 +20,36 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Docker Deployment
+
+### Environment Variables Setup
+
+Before building the Docker image, make sure to:
+
+1. Copy `env.example` to `.env` and fill in your values:
+```bash
+cp env.example .env
+```
+
+2. For production, copy `env.production.example` to `.env.production`:
+```bash
+cp env.production.example .env.production
+```
+
+3. Fill in the required environment variables in your `.env` files.
+
+### Building and Running with Docker
+
+```bash
+# Build the image
+docker build -t codeflow-client .
+
+# Run the container
+docker run -p 3002:3002 --env-file .env codeflow-client
+```
+
+**Important**: The Docker setup uses Next.js standalone mode and automatically loads environment variables from `.env` files. Make sure your environment files are properly configured before building.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -8,7 +8,7 @@ import TitleHeader from '@/components/layout/TitleHeader';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Tag_GetAll from '@/hooks/query-hooks/Tag/useQ_Tag_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { postSchemaType, usePostSchema } from '@/lib/validations/postSchema';
@@ -63,7 +63,7 @@ export default function PostsCreate() {
     },
     onSuccess: () => {
       reset();
-      router.push(localPath(paths.POSTS));
+      router.push(localPath(Paths.POSTS));
       toast.success('Post created successfully');
     },
   });
@@ -127,7 +127,7 @@ export default function PostsCreate() {
             <Button
               variant={'outline'}
               type="button"
-              onClick={() => router.push(localPath(paths.POSTS))}
+              onClick={() => router.push(localPath(Paths.POSTS))}
             >
               {t('cancel')}
             </Button>

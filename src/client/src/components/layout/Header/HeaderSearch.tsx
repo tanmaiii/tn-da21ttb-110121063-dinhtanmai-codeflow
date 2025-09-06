@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetAll from '@/hooks/query-hooks/Course/useQ_Course_GetAll';
 import useQ_Post_GetAll from '@/hooks/query-hooks/Post/useQ_Post_GetAll';
 import useQ_Topic_GetAll from '@/hooks/query-hooks/Topic/useQ_Topic_GetAll';
@@ -118,7 +118,7 @@ export default function HeaderSearch() {
           }}
           onKeyDown={e => {
             if (e.key === 'Enter' && keyword.trim()) {
-              router.push(`${paths.SEARCH}?keyword=${keyword.trim()}`);
+              router.push(`${Paths.SEARCH}?keyword=${keyword.trim()}`);
               setIsFocused(false);
             }
           }}
@@ -169,7 +169,7 @@ export default function HeaderSearch() {
                         title: course.title,
                         description: course.author?.name ?? '',
                         image: course.thumbnail ?? '',
-                        link: `${paths.COURSES}/${course.id}`,
+                        link: `${Paths.COURSES}/${course.id}`,
                       }}
                     />
                   ))}
@@ -193,7 +193,7 @@ export default function HeaderSearch() {
                         title: post.title,
                         description: post.author?.name ?? '',
                         image: post.thumbnail ?? '',
-                        link: `${paths.POSTS}/${post.id}`,
+                        link: `${Paths.POSTS}/${post.id}`,
                       }}
                     />
                   ))}
@@ -217,7 +217,7 @@ export default function HeaderSearch() {
                         title: topic.title,
                         description: topic.author?.name ?? '',
                         image: '',
-                        link: `${paths.TOPICS}/${topic.id}`,
+                        link: `${Paths.TOPICS}/${topic.id}`,
                       }}
                     />
                   ))}
@@ -233,7 +233,7 @@ export default function HeaderSearch() {
               variant="text"
               className="w-full justify-start mt-2"
               onClick={() => {
-                router.push(`${paths.SEARCH}?keyword=${keyword || debouncedKeyword}`);
+                router.push(`${Paths.SEARCH}?keyword=${keyword || debouncedKeyword}`);
                 setIsFocused(false);
               }}
             >

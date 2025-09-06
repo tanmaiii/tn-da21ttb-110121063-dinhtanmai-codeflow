@@ -3,7 +3,7 @@ import IconLoading from '@/components/common/IconLoading/IconLoading';
 import TextInput from '@/components/common/Input/TextInput/TextInput';
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import {
     forgotPasswordSchemaType,
@@ -59,7 +59,7 @@ export default function ForgotPassword() {
           </div>
           <TextDescription className="text-base">{t('checkEmailForResetLink')}</TextDescription>
         </div>
-        <Link href={localPath(paths.LOGIN)}>
+        <Link href={localPath(Paths.LOGIN)}>
           <Button className="w-full h-12 bg-primary text-white hover:bg-primary/80">
             {t('backToLogin')}
           </Button>
@@ -107,7 +107,7 @@ export default function ForgotPassword() {
         <TextDescription className="text-gray-500 dark:text-gray-400">
           {t('rememberPassword')}
         </TextDescription>
-        <Link href={localPath(paths.LOGIN)}>
+        <Link href={localPath(Paths.LOGIN)}>
           <TextDescription className="text-primary hover:text-primary/80 cursor-pointer ml-1">
             {t('backToLogin')}
           </TextDescription>

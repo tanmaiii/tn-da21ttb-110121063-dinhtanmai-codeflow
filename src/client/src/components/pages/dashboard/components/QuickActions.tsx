@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { IconPlus, IconArrowRight, IconTarget } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { useTranslations } from 'next-intl';
 
 interface QuickActionsProps {
@@ -25,7 +25,7 @@ export default function QuickActions({ variant }: QuickActionsProps) {
               </p>
             </div>
             <Button
-              onClick={() => router.push(paths.COURSES)}
+              onClick={() => router.push(Paths.COURSES)}
               className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-lg"
             >
               <IconPlus className="w-4 h-4 mr-2" />
@@ -48,7 +48,7 @@ export default function QuickActions({ variant }: QuickActionsProps) {
               <p className="text-muted-foreground">{t('shareKnowledge')}</p>
             </div>
             <Button 
-              onClick={() => router.push(paths.COURSE_CREATE)} 
+              onClick={() => router.push(Paths.COURSE_CREATE)} 
               className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 shadow-lg"
             >
               <IconPlus className="w-4 h-4 mr-2" />
@@ -67,7 +67,7 @@ export default function QuickActions({ variant }: QuickActionsProps) {
             </div>
             <Button 
               variant="outline"
-              onClick={() => router.push(paths.TOPICS)} 
+              onClick={() => router.push(Paths.TOPICS)} 
               className="hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700"
             >
               <IconTarget className="w-4 h-4 mr-2" />

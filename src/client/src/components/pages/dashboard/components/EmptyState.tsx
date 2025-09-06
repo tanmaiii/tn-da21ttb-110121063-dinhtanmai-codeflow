@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { IconBook, IconChalkboard, IconPlus } from '@tabler/icons-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -22,7 +22,7 @@ export default function EmptyState({ variant }: EmptyStateProps) {
           <h4 className="text-xl font-semibold  mb-2">{t('noCourses')}</h4>
           <p className="text-muted-foreground mb-6">{t('startLearningJourney')}</p>
           <Button
-            onClick={() => router.push(paths.COURSES)}
+            onClick={() => router.push(Paths.COURSES)}
             className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
           >
             <IconPlus className="w-4 h-4 mr-2" />
@@ -42,7 +42,7 @@ export default function EmptyState({ variant }: EmptyStateProps) {
         <h4 className="text-xl font-semibold  mb-2">{t('noCourses')}</h4>
         <p className="text-muted-foreground mb-6">{t('createFirstCourse')}</p>
         <Button
-          onClick={() => router.push(paths.COURSE_CREATE)}
+          onClick={() => router.push(Paths.COURSE_CREATE)}
           className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
         >
           <IconPlus className="w-4 h-4 mr-2" />

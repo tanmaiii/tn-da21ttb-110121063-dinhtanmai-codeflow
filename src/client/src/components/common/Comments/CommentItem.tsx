@@ -14,6 +14,7 @@ import Comment_More from './CommentMore';
 import { useUserStore } from '@/stores/user_store';
 import apiConfig from '@/lib/api';
 import MyImage from '../MyImage';
+import { IMAGES } from '@/data/images';
 
 interface CommentItemProps {
   comment?: IComment;
@@ -119,7 +120,7 @@ export default function CommentItem({ comment }: CommentItemProps) {
                 width={40}
                 height={40}
                 className="w-full h-full object-cover rounded-lg"
-                defaultSrc={apiConfig.avatar(comment?.author?.name ?? 'c')}
+                defaultSrc={IMAGES.DEFAULT_AVATAR.src}
               />
             </div>
             <div className="flex items-center gap-2">

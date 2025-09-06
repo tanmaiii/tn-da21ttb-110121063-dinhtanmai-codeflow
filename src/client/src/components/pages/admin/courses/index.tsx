@@ -13,7 +13,7 @@ import TextHeading, { TextDescription } from '@/components/ui/text';
 import { ENUM_TYPE_COURSE } from '@/constants/enum';
 import { STATUS_COURSE, TYPE_COURSE } from '@/constants/object';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetAll from '@/hooks/query-hooks/Course/useQ_Course_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { ICourse } from '@/interfaces/course';
@@ -74,7 +74,7 @@ export default function Courses() {
           return (
             <div className="flex flex-col">
               <Link
-                href={localPath(paths.COURSES_DETAIL(row.original.id))}
+                href={localPath(Paths.COURSES_DETAIL(row.original.id))}
                 className="flex items-center gap-2"
               >
                 <MyImage
@@ -187,7 +187,7 @@ export default function Courses() {
     return (
       <>
         <Button
-          onClick={() => router.push(paths.COURSE_CREATE)}
+          onClick={() => router.push(Paths.COURSE_CREATE)}
           variant="outline"
           size="sm"
           className="w-fit"
@@ -254,7 +254,7 @@ export default function Courses() {
             <div className="flex">
               <ActionIcon
                 actionType="view"
-                onClick={() => router.push(paths.COURSES_DETAIL(course.id))}
+                onClick={() => router.push(Paths.COURSES_DETAIL(course.id))}
                 type="button"
               />
 
@@ -268,7 +268,7 @@ export default function Courses() {
               ) : (
                 <ActionIcon
                   actionType="update"
-                  onClick={() => router.push(paths.COURSE_UPDATE(course.id))}
+                  onClick={() => router.push(Paths.COURSE_UPDATE(course.id))}
                   type="button"
                 />
               )}

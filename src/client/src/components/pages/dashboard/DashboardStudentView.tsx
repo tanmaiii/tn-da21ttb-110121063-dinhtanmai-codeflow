@@ -2,7 +2,7 @@
 import CardCourse from '@/components/common/CardCourse/CardCourse';
 import { DashboardFullSkeleton } from '@/components/skeletons';
 import { Button } from '@/components/ui/button';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ICourse } from '@/interfaces/course';
 import courseService from '@/services/course.service';
 import { useUserStore } from '@/stores/user_store';
@@ -118,7 +118,7 @@ export default function DashboardStudentView() {
           </div>
           <Button
             variant="outline"
-            onClick={() => router.push(paths.COURSES)}
+            onClick={() => router.push(Paths.COURSES)}
             className="hover:bg-blue-50 hover:border-blue-200 hover:text-blue-700"
           >
             {t('viewAll')}

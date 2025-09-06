@@ -6,13 +6,15 @@ services:
     image: mysql:8.0
     container_name: codeflow-mysql
     restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
-      MYSQL_DATABASE: ${DB_DATABASE:-codeflow}
-      MYSQL_USER: ${DB_USER:-codeflow_user}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-password}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
-      - "${DB_PORT:-3307}:3306"
+      - "${DB_PORT}:3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./src/database:/docker-entrypoint-initdb.d
@@ -24,45 +26,47 @@ services:
     build: ./src/server
     container_name: codeflow-backend
     restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
       # ===== BACKEND CONFIGURATION =====
-      NODE_ENV: ${NODE_ENV:-production}
-      PORT: 3000
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
       
       # Database Configuration
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_USER: ${DB_USER:-codeflow_user}
-      DB_PASSWORD: ${DB_PASSWORD:-password}
-      DB_DATABASE: ${DB_DATABASE:-codeflow}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
       
       # Security & Auth
-      SECRET_KEY: ${SECRET_KEY:-your-secret-key-here}
-      ORIGIN: ${ORIGIN:-http://localhost:3002}
-      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3002}
-      CREDENTIALS: true
+      SECRET_KEY: ${SECRET_KEY}
+      ORIGIN: ${ORIGIN}
+      FRONTEND_URL: ${FRONTEND_URL}
+      CREDENTIALS: ${CREDENTIALS}
       
       # Logging
-      LOG_FORMAT: ${LOG_FORMAT:-combined}
-      LOG_DIR: ./logs
+      LOG_FORMAT: ${LOG_FORMAT}
+      LOG_DIR: ${LOG_DIR}
       
       # GitHub Integration (Backend)
-      ORGANIZATION_NAME: ${ORGANIZATION_NAME:-organization-codeflow}
-      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
-      GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET:-}
-      WEBHOOK_URL: ${WEBHOOK_URL:-}
+      ORGANIZATION_NAME: ${ORGANIZATION_NAME}
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET}
+      WEBHOOK_URL: ${WEBHOOK_URL}
       
       # AI & Analysis Services
-      GEMINI_TOKEN: ${GEMINI_TOKEN:-}
-      SONAR_TOKEN: ${SONAR_TOKEN:-}
-      SONAR_ORG_TOKEN: ${SONAR_ORG_TOKEN:-}
+      GEMINI_TOKEN: ${GEMINI_TOKEN}
+      SONAR_TOKEN: ${SONAR_TOKEN}
+      SONAR_ORG_TOKEN: ${SONAR_ORG_TOKEN}
       
       # Email Configuration
-      SMTP_USER: ${SMTP_USER:-}
-      SMTP_PASS: ${SMTP_PASS:-}
-      SMTP_FROM: ${SMTP_FROM:-}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      SMTP_FROM: ${SMTP_FROM}
     ports:
-      - "${BACKEND_PORT:-3001}:3000"
+      - "${PORT}:${PORT}"
     volumes:
       - backend_uploads:/app/uploads
       - backend_logs:/app/logs
@@ -71,50 +75,51 @@ services:
     depends_on:
       - mysql
       - redis
+    expose:
+      - "3001"
 
   # Frontend Next.js App
   frontend:
     build: ./src/client
     container_name: codeflow-frontend
     restart: unless-stopped
+    env_file:
+      - ./.env
     environment:
       # ===== FRONTEND CONFIGURATION =====
-      NODE_ENV: ${NODE_ENV:-production}
-      PORT: 3002
-      HOSTNAME: "0.0.0.0"
-      
-      # Next.js Public API Configuration
-      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:3001}
-      NEXT_PUBLIC_SECRET_KEY: ${NEXT_PUBLIC_SECRET_KEY:-}
-      NEXT_PUBLIC_ORG_NAME: ${NEXT_PUBLIC_ORG_NAME:-organization-codeflow}
-      
-      # GitHub OAuth for NextAuth
-      GITHUB_ID: ${GITHUB_ID:-}
-      GITHUB_SECRET: ${GITHUB_SECRET:-}
-      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3002}
+      NODE_ENV: production
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
       
       # Firebase Configuration
-      NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY:-}
-      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN:-}
-      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID:-}
-      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:-}
-      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID:-}
-      NEXT_PUBLIC_FIREBASE_APP_ID: ${NEXT_PUBLIC_FIREBASE_APP_ID:-}
-      NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID:-}
+      NEXT_PUBLIC_FIREBASE_API_KEY: ${NEXT_PUBLIC_FIREBASE_API_KEY}
+      NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: ${NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN}
+      NEXT_PUBLIC_FIREBASE_PROJECT_ID: ${NEXT_PUBLIC_FIREBASE_PROJECT_ID}
+      NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET: ${NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}
+      NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID: ${NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID}
+      NEXT_PUBLIC_FIREBASE_APP_ID: ${NEXT_PUBLIC_FIREBASE_APP_ID}
+      NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID: ${NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID}
+      
+      # API Configuration
+      NEXT_PUBLIC_API_URL: ${NEXTAUTH_URL}/api
+      NEXT_PUBLIC_IMAGE_URL: ${NEXTAUTH_URL}/api
+      NEXT_PUBLIC_SECRET_KEY: ${NEXT_PUBLIC_SECRET_KEY}
+      NEXT_PUBLIC_ORG_NAME: ${NEXT_PUBLIC_ORG_NAME}
     ports:
-      - "${FRONTEND_PORT:-3002}:3002"
+      - "3002:3002"
     networks:
       - codeflow-network
     depends_on:
       - backend
-
+    expose:
+      - "3002"
+      
   # Redis
   redis:
     image: redis:7-alpine
     container_name: codeflow-redis
     restart: unless-stopped
     ports:
-      - "${REDIS_PORT:-6379}:6379"
+      - "6379:6379"
     volumes:
       - redis_data:/data
     networks:

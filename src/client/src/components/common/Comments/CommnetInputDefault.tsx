@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { TextDescription } from "@/components/ui/text";
-import { paths } from "@/data/path";
+import { Paths } from "@/data/path";
 import apiConfig from "@/lib/api";
 import { useUserStore } from "@/stores/user_store";
 import { useTranslations } from "next-intl";
@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import MyImage from "../MyImage";
 import CommentInput from "./CommentInput";
+import { IMAGES } from "@/data/images";
 
 export default function CommnetInputDefault({
   onSubmit,
@@ -23,7 +24,7 @@ export default function CommnetInputDefault({
     return (
       <div className="flex flex-col w-full bg-input/20 border rounded-lg p-4 gap-3">
           <TextDescription>Vui lòng đăng nhập để bình luận</TextDescription>
-          <Button variant="default" onClick={() => router.push(paths.LOGIN)}>Đăng nhập</Button>
+          <Button variant="default" onClick={() => router.push(Paths.LOGIN)}>Đăng nhập</Button>
       </div>
     )
   }
@@ -43,7 +44,7 @@ export default function CommnetInputDefault({
                 width={40}
                 height={40}
                 className="w-full h-full object-cover rounded-lg"
-                defaultSrc={apiConfig.avatar(user?.name ?? "c")}
+                defaultSrc={IMAGES.DEFAULT_AVATAR.src}
               />
             </div>
             <div className="flex items-center gap-2">

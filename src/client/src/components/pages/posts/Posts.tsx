@@ -5,7 +5,7 @@ import NoData from '@/components/common/NoData/NoData';
 import { PostListSkeleton } from '@/components/skeletons/post';
 import { Button } from '@/components/ui/button';
 import TextHeading, { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Post_GetAll from '@/hooks/query-hooks/Post/useQ_Post_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { IPost } from '@/interfaces/post';
@@ -40,7 +40,7 @@ export default function Posts() {
         </div>
         {user && user?.role !== 'user' && (
           <Button
-            onClick={() => route.push(localPath(paths.POST_CREATE))}
+            onClick={() => route.push(localPath(Paths.POST_CREATE))}
             variant="outline"
             className="bg-background-1"
             size="sm"
@@ -62,7 +62,7 @@ export default function Posts() {
           currentPage={Number(page)}
           totalPages={Q_Post.data?.pagination.totalPages ?? 1}
           onPageChange={(page: number) => {
-            route.push(`${localPath(paths.POSTS)}?page=${page}`);
+            route.push(`${localPath(Paths.POSTS)}?page=${page}`);
           }}
         />
       </div>

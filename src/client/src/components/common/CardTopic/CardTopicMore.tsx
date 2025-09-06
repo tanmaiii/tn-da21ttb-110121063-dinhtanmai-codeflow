@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { ITopic } from '@/interfaces/topic';
 import topicService from '@/services/topic.service';
@@ -26,7 +26,7 @@ export default function CardTopicMore({ topic, className }: CardPost_MoreProps) 
 
 
   const onView = () => {
-    router.push(localPath(paths.TOPICS_DETAIL(topic.id)));
+    router.push(localPath(Paths.TOPICS_DETAIL(topic.id)));
   };
 
   const mutationDelete = useMutation({
@@ -57,7 +57,7 @@ export default function CardTopicMore({ topic, className }: CardPost_MoreProps) 
       id: 'update',
       label: 'Update Topic',
       icon: <IconPencil size={16} />,
-      onClick: () => router.push(localPath(`/admin/${paths.TOPIC_UPDATE(topic.id)}`)),
+      onClick: () => router.push(localPath(`/admin/${Paths.TOPIC_UPDATE(topic.id)}`)),
       isVisible: isAdmin,
     },
     {

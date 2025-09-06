@@ -2,7 +2,7 @@
 
 import { ROLE_USER } from '@/constants/object';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ILinkItem } from '@/interfaces/common';
 import apiConfig from '@/lib/api';
 import { cn } from '@/lib/utils';
@@ -31,6 +31,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import MyImage from '../common/MyImage';
+import { useLocale } from 'next-intl';
 
 const iconMap: Record<string, LucideIcon> = {
   layout: Layout,
@@ -49,13 +50,14 @@ const RenderNavItem = ({ item, prefix }: { item: ILinkItem; prefix: string }) =>
   const Icon = iconMap[item.icon] || Home;
   const { collapsed } = useSidebarStore();
   const t = useTranslations();
+  const currentLocale = useLocale();
 
   const pathname = usePathname();
-  const pathWithoutLocale = pathname?.replace(/^\/(en|vi)/, '');
+  const pathWithoutLocale = pathname?.replace(/^\/(en|vi|cp|ja)/, '');
 
   let isActive = false;
   if (item.href === '/') {
-    isActive = pathWithoutLocale === '/' || pathname === '/en' || pathname === '/vi';
+    isActive = pathWithoutLocale === '/' || pathname === '/en' || pathname === '/vi' || pathname === '/cp' || pathname === '/ja';
   } else {
     isActive =
       pathWithoutLocale === `${prefix}${item.href}` ||
@@ -67,7 +69,7 @@ const RenderNavItem = ({ item, prefix }: { item: ILinkItem; prefix: string }) =>
     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
       <Link
         key={item.href}
-        href={`${prefix}${item.href}`}
+        href={`/${currentLocale}${prefix}${item.href}`}
         className={cn(
           'flex items-center gap-2 px-3 py-3 rounded-lg hover:bg-primary/10',
           isActive && 'bg-primary/10',
@@ -123,7 +125,7 @@ export default function Sidebar({ menu, prefix = '' }: SidebarProps) {
         collapsed ? 'hidden md:flex' : 'w-full md:w-64',
       )}
     >
-      <Link href={paths.HOME} className="flex items-center gap-2">
+      <Link href={Paths.HOME} className="flex items-center gap-2">
         <motion.div layout className="p-4 gap-2 flex items-center w-full justify-start">
           <Image
             width={40}
@@ -158,7 +160,7 @@ export default function Sidebar({ menu, prefix = '' }: SidebarProps) {
           <>
             <motion.div
               whileHover={{ scale: 1.02 }}
-              onClick={() => router.push(paths.USER_DETAIL(user.id))}
+              onClick={() => router.push(Paths.USER_DETAIL(user.id))}
               className="flex items-center cursor-pointer gap-2 px-3 py-3 rounded-lg hover:bg-primary/10 dark:hover:bg-background-2"
             >
               <MyImage
@@ -170,7 +172,7 @@ export default function Sidebar({ menu, prefix = '' }: SidebarProps) {
                   'object-cover circle rounded-full w-8 h-8 max-w-8 max-h-8',
                   collapsed && 'w-full h-full',
                 )}
-                defaultSrc={apiConfig.avatar(user?.name ?? 'c')}
+                defaultSrc={IMAGES.DEFAULT_AVATAR.src}
               />
               <AnimatePresence mode="wait">
                 {!collapsed && (
@@ -194,7 +196,7 @@ export default function Sidebar({ menu, prefix = '' }: SidebarProps) {
             </motion.div>
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
-                href={paths.LOGOUT}
+                href={Paths.LOGOUT}
                 className="flex items-center gap-2 px-3 py-3 rounded-lg hover:bg-primary/10 dark:hover:bg-background-2"
               >
                 <LogOut className="w-5 h-5" />
@@ -216,7 +218,7 @@ export default function Sidebar({ menu, prefix = '' }: SidebarProps) {
         ) : (
           <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
             <Link
-              href={paths.LOGIN}
+              href={Paths.LOGIN}
               className="flex items-center gap-2 px-3 py-3 rounded-lg hover:bg-primary/10 dark:hover:bg-background-2"
             >
               <LogIn className="w-5 h-5" />

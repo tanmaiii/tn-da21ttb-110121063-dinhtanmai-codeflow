@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { TYPE_COURSE } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Tag_GetAll from '@/hooks/query-hooks/Tag/useQ_Tag_GetAll';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { ICreateCourseDto } from '@/interfaces/course';
@@ -78,7 +78,7 @@ export default function CoursesCreate() {
     },
     onSuccess: () => {
       reset();
-      router.push(localPath(paths.COURSES));
+      router.push(localPath(Paths.COURSES));
       toast.success(tCommon('createSuccess'));
     },
     onError: () => {
@@ -191,7 +191,7 @@ export default function CoursesCreate() {
               <Button
                 variant={'outline'}
                 type="button"
-                onClick={() => router.push(localPath(paths.COURSES))}
+                onClick={() => router.push(localPath(Paths.COURSES))}
               >
                 {t('cancel')}
               </Button>

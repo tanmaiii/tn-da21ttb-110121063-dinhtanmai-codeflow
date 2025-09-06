@@ -9,7 +9,7 @@ import { MyPagination } from '@/components/common/MyPagination/MyPagination';
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
 import { STATUS_TOPIC, STATUS_TOPIC_CUSTOM } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAllByCourseId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByCourseId';
 import { ITopic } from '@/interfaces/topic';
 import apiConfig from '@/lib/api';
@@ -72,7 +72,7 @@ export default function CoursesDetailTopicsTable() {
         header: ({ column }) => <DataTableColumnHeader column={column} title={t('title')} />,
         accessorKey: 'title',
         cell: ({ row }) => (
-          <Link href={`${paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
+          <Link href={`${Paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
         ),
         size: 100,
       },
@@ -167,7 +167,7 @@ export default function CoursesDetailTopicsTable() {
             <div className="flex justify-center">
               <ActionIcon
                 actionType={'view'}
-                onClick={() => router.push(`${paths.TOPICS_DETAIL(row.original.id)}`)}
+                onClick={() => router.push(`${Paths.TOPICS_DETAIL(row.original.id)}`)}
                 type="button"
               />
               {user?.id === Q_Course?.data.authorId && (

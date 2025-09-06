@@ -17,13 +17,15 @@ import avatar from "@/assets/images/github.png";
 import gg from "@/assets/images/google.png";
 import bgLogin from "@/assets/images/bg-login.jpg";
 import bgLogin2 from "@/assets/images/bg-login-2.png";
+import defaultAvatar from "@/assets/images/avatar.png";
+
 export const IMAGES = {
   LOGO: logo,
   LOGO_LIGHT: logoLight,
   DEFAULT_COURSE: dfCourses,
   DEFAULT_PROJECT: dfCourses,
   DEFAULT_POST: dfCourses,
-  DEFAULT_AVATAR: dfCourses,
+  DEFAULT_AVATAR: defaultAvatar,
   BG_AUTH: authbg,
   ERR_404: err404,
   GITHUB: github,

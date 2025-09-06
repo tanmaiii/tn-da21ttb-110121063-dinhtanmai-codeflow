@@ -2,7 +2,7 @@ import { DataTable } from '@/components/common/DataTable/data-table';
 import { DataTableColumnHeader } from '@/components/common/DataTable/data-table-column-header';
 import { MyPagination } from '@/components/common/MyPagination/MyPagination';
 import TextHeading, { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAllByCourseId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByCourseId';
 import { ITopic } from '@/interfaces/topic';
 import { ColumnDef } from '@tanstack/react-table';
@@ -32,7 +32,7 @@ export default function CoursesTopics() {
         header: ({ column }) => <DataTableColumnHeader column={column} title={t('title')} />,
         accessorKey: 'title',
         cell: ({ row }) => (
-          <Link href={`${paths.TOPICS_DETAIL(row.original.id)}`}>
+          <Link href={`${Paths.TOPICS_DETAIL(row.original.id)}`}>
             <TextDescription className="line-clamp-2 font-normal text-color-1">
               {row.original.title}
             </TextDescription>

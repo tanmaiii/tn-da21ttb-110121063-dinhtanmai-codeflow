@@ -40,6 +40,18 @@ const sequelize = new Sequelize.Sequelize(DB_DATABASE, DB_USER, DB_PASSWORD, {
   pool: {
     min: 0,
     max: 5,
+    acquire: 30000, // 30 seconds
+    idle: 10000,    // 10 seconds
+  },
+  retry: {
+    match: [
+      /ECONNRESET/,
+      /ENOTFOUND/,
+      /ECONNREFUSED/,
+      /ETIMEDOUT/,
+      /EHOSTUNREACH/,
+    ],
+    max: 3,
   },
   logQueryParameters: NODE_ENV === 'development',
   logging: (query, time) => {

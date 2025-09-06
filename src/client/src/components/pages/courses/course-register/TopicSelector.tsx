@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
 import { TextDescription } from '@/components/ui/text';
 import { STATUS_TOPIC, STATUS_TOPIC_CUSTOM } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Topic_GetAllByCourseId from '@/hooks/query-hooks/Topic/useQ_Topic_GetAllByCourseId';
 import { ITopic } from '@/interfaces/topic';
 import apiConfig from '@/lib/api';
@@ -47,7 +47,7 @@ export default function TopicSelector({ onSelect, courseId }: TopicSelectorProps
         header: ({ column }) => <DataTableColumnHeader column={column} title="Title" />,
         accessorKey: 'title',
         cell: ({ row }) => (
-          <Link href={`${paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
+          <Link href={`${Paths.TOPICS_DETAIL(row.original.id)}`}>{row.original.title}</Link>
         ),
         size: 200,
       },

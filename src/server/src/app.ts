@@ -32,6 +32,7 @@ export class App {
     this.port = PORT || 3000;
 
     this.connectToDatabase();
+    this.setupProcessHandlers();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
@@ -78,7 +79,15 @@ export class App {
   }
 
   private async connectToDatabase() {
-    await DB.sequelize.sync({ force: false }); // true nếu muốn xóa bảng cũ và tạo bảng mới
+    try {
+      await DB.sequelize.authenticate();
+      logger.info('✅ Database connection has been established successfully.');
+      await DB.sequelize.sync({ force: false }); // true nếu muốn xóa bảng cũ và tạo bảng mới
+      logger.info('✅ Database synchronized successfully.');
+    } catch (error) {
+      logger.error('❌ Unable to connect to the database:', error);
+      process.exit(1); // Exit cleanly instead of crashing
+    }
   }
 
   private initializeMiddlewares() {
@@ -109,6 +118,17 @@ export class App {
     // Cho phép truy cập file ảnh tĩnh từ /public
     this.app.use('/public/images', express.static(path.join(__dirname, '../uploads/images')));
     this.app.use('/public/files', express.static(path.join(__dirname, '../uploads/files')));
+    
+    // Thêm route trực tiếp cho uploads directory để hỗ trợ Docker
+    this.app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+    
+    // Thêm CORS headers cho static files
+    this.app.use('/public', (req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+      next();
+    });
   }
 
   private initializeRoutes(routes: Routes[]) {
@@ -135,5 +155,30 @@ export class App {
 
   private initializeErrorHandling() {
     this.app.use(ErrorMiddleware);
+  }
+
+  private setupProcessHandlers() {
+    // Handle unhandled promise rejections
+    process.on('unhandledRejection', (reason, promise) => {
+      logger.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+      process.exit(1);
+    });
+
+    // Handle uncaught exceptions
+    process.on('uncaughtException', (error) => {
+      logger.error('❌ Uncaught Exception:', error);
+      process.exit(1);
+    });
+
+    // Graceful shutdown
+    process.on('SIGTERM', () => {
+      logger.info('🔄 SIGTERM received, shutting down gracefully');
+      process.exit(0);
+    });
+
+    process.on('SIGINT', () => {
+      logger.info('🔄 SIGINT received, shutting down gracefully');
+      process.exit(0);
+    });
   }
 }

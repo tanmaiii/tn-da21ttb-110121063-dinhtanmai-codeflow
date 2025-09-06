@@ -7,7 +7,7 @@ import TitleHeader from '@/components/layout/TitleHeader';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { STATUS_TOPIC } from '@/constants/object';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Course_GetAll from '@/hooks/query-hooks/Course/useQ_Course_GetAll';
 import useQ_Course_GetDetail from '@/hooks/query-hooks/Course/useQ_Course_GetDetail';
 import useQ_Course_GetMembers from '@/hooks/query-hooks/Course/useQ_Course_GetMembers';
@@ -58,7 +58,7 @@ export default function TopicsUpdate() {
     },
     onSuccess: () => {
       toast.success(t('updateSuccess'));
-      router.push(`/admin/${paths.TOPICS}`);
+      router.push(`/admin/${Paths.TOPICS}`);
       queryClient.invalidateQueries({ queryKey: ['topics'] });
       reset();
     },

@@ -2,7 +2,7 @@
 import CardCourse from '@/components/common/CardCourse/CardCourse';
 import { DashboardFullSkeleton } from '@/components/skeletons';
 import { Button } from '@/components/ui/button';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { ICourse } from '@/interfaces/course';
 import courseService from '@/services/course.service';
 import { useUserStore } from '@/stores/user_store';
@@ -95,7 +95,7 @@ export default function DashboardTeacherView() {
           icon={IconBook}
           description={t('created')}
           color="default"
-          onClick={() => router.push(paths.COURSES)}
+          onClick={() => router.push(Paths.COURSES)}
         />
         <StatCard
           title={t('students')}
@@ -132,7 +132,7 @@ export default function DashboardTeacherView() {
           </div>
           <Button
             variant="outline"
-            onClick={() => router.push(paths.COURSES)}
+            onClick={() => router.push(Paths.COURSES)}
             className="hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700"
           >
             {t('viewAll')}

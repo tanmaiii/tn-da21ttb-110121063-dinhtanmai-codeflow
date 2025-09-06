@@ -2,7 +2,7 @@
 import { Card, CardContent } from '@/components/ui/card';
 import TextHeading, { TextDescription } from '@/components/ui/text';
 import { IMAGES } from '@/data/images';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Post_CheckLike from '@/hooks/query-hooks/Post/useQ_Post_CheckLike';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import { IPost } from '@/interfaces/post';
@@ -63,7 +63,7 @@ export default function CardPost({ post }: CardPostProps) {
   });
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.origin + localPath(paths.POSTS + '/' + post.id));
+    navigator.clipboard.writeText(window.location.origin + localPath(Paths.POSTS + '/' + post.id));
     toast.success('Copied to clipboard');
   };
 
@@ -72,7 +72,7 @@ export default function CardPost({ post }: CardPostProps) {
       <CardContent className="px-2 h-full flex flex-col justify-between">
         <div className="pt-2 mb-auto">
           <div className="flex items-center justify-between">
-            <Link href={`${localPath(paths.USER_DETAIL(post?.author?.id ?? ''))}`}>
+            <Link href={`${localPath(Paths.USER_DETAIL(post?.author?.id ?? ''))}`}>
               <Tooltip tooltip={post?.author?.name ?? ''}>
                 <MyImage
                   className="w-8 h-8 rounded-full"
@@ -84,13 +84,13 @@ export default function CardPost({ post }: CardPostProps) {
                   alt="Google"
                   width={100}
                   height={100}
-                  defaultSrc={apiConfig.avatar(post?.author?.name ?? 'c')}
+                  defaultSrc={IMAGES.DEFAULT_AVATAR.src}
                 />
               </Tooltip>
             </Link>
             <CardPost_More className="group-hover/item:opacity-100 opacity-0" post={post} />
           </div>
-          <Link href={`${localPath(paths.POSTS + '/' + post.id)}`} className="">
+          <Link href={`${localPath(Paths.POSTS + '/' + post.id)}`} className="">
             <TextHeading className="text-color-1 align-left font-bold text-lg mt-2 line-clamp-2 hover:underline ">
               {post.title}
             </TextHeading>
@@ -133,7 +133,7 @@ export default function CardPost({ post }: CardPostProps) {
           <CardPost_Button
             icon={<IconMessage2 size={24} />}
             value={post?.commentCount.toString() ?? '0'}
-            onClick={() => router.push(localPath(paths.POSTS + '/' + post.id))}
+            onClick={() => router.push(localPath(Paths.POSTS + '/' + post.id))}
           />
           <CardPost_Button icon={<IconLink size={24} />} onClick={handleCopyLink} />
         </div>

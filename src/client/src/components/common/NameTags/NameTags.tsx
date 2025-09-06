@@ -1,4 +1,4 @@
-import { paths } from "@/data/path";
+import { Paths } from "@/data/path";
 import { ITag } from "@/interfaces/tags";
 import { cn } from "@/lib/utils";
 import { cx } from "class-variance-authority";
@@ -27,7 +27,7 @@ export default function NameTags({
         return (
           <span
             key={tag.id || index}
-            onClick={() => router.push(paths.TAG(tag.id))}
+            onClick={() => router.push(Paths.TAG(tag.id))}
             className={cn(
               "text-xs font-medium px-2 py-0.5 rounded-full",
               "bg-primary/10 text-primary hover:bg-primary/20 transition-colors",

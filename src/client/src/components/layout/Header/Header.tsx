@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import { useSidebarStore } from '@/stores/sidebar_store';
 import { useUserStore } from '@/stores/user_store';
 import { PanelLeftClose, PanelRightClose } from 'lucide-react';
@@ -50,7 +50,7 @@ export default function Header() {
             size="icon"
             className="p-3"
           >
-            <Link href={isAdminPage ? localPath(paths.HOME) : localPath(paths.ADMIN)}>
+            <Link href={isAdminPage ? localPath(Paths.HOME) : localPath(Paths.ADMIN)}>
               {isAdminPage ? <IconUser /> : <IconDashboard />}
             </Link>
           </ButtonTooltip>
@@ -59,7 +59,7 @@ export default function Header() {
         <ThemeToggle />
         {!user && (
           <Button>
-            <Link className="text-white" href={paths.LOGIN}>
+            <Link className="text-white" href={Paths.LOGIN}>
               {tAuth('signIn')}
             </Link>
           </Button>

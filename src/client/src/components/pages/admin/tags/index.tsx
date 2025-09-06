@@ -6,7 +6,7 @@ import { MyPagination } from '@/components/common/MyPagination/MyPagination';
 import TitleHeader from '@/components/layout/TitleHeader';
 import { Button } from '@/components/ui/button';
 import { TextDescription } from '@/components/ui/text';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useQ_Tag_GetAllPagi from '@/hooks/query-hooks/Tag/useQ_Tag_GetAllPagi';
 import { useDebounce } from '@/hooks/useDebounce';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
@@ -51,7 +51,7 @@ export default function Tags() {
         cell: ({ row }) => {
           return (
             <div className="flex flex-col">
-              <Link href={localPath(paths.TAG(row.original.id))}>{row.original.name}</Link>
+              <Link href={localPath(Paths.TAG(row.original.id))}>{row.original.name}</Link>
               {row.original.deletedAt && (
                 <TextDescription className="text-xs text-red-500 font-semibold">
                   {tCommon('softDeleted')} {utils_DateToDDMMYYYY(row.original.deletedAt!)}

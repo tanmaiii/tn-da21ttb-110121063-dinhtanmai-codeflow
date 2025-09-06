@@ -1,7 +1,7 @@
 import ActionModal from '@/components/common/Action/ActionModal';
 import { Button } from '@/components/ui/button';
 import { DialogClose } from '@/components/ui/dialog';
-import { paths } from '@/data/path';
+import { Paths } from '@/data/path';
 import useH_LocalPath from '@/hooks/useH_LocalPath';
 import courseService from '@/services/course.service';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -54,7 +54,7 @@ export default function CardCourse_Submit({ courseId }: CardCourse_SubmitProps) 
     },
     onSuccess: () => {
       toast.success(tCommon('joinSuccess'));
-      router.push(`${localPath(paths.COURSES_DETAIL(courseId))}`);
+      router.push(`${localPath(Paths.COURSES_DETAIL(courseId))}`);
     },
     onError: (err: unknown) => {
       setErr((err as Error)?.message || t('error'));

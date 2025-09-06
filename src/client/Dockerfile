@@ -1,4 +1,4 @@
-# Base image with Node.js LTS
+# Base image với Node.js LTS
 FROM node:18-alpine
 
 # Set working directory
@@ -6,31 +6,26 @@ WORKDIR /app
 
 # Copy package files
 COPY package*.json ./
-COPY .env* ./
 
-# Create npmrc to bypass peer deps
+# Bỏ qua lỗi peer dependencies nếu có
 RUN echo "legacy-peer-deps=true" > .npmrc
 
-# Install dependencies  
-RUN npm install 
+# Cài đặt dependencies
+RUN npm install
 
-# Copy source code
+# Copy toàn bộ source code
 COPY . .
 
-# Build the application
+# Build ứng dụng Next.js
 RUN npm run build
 
-# Expose port
+# Mở port ứng dụng
 EXPOSE 3002
 
-# Copy static files for standalone mode
-RUN cp -r .next/static .next/standalone/.next/ || true
-RUN cp -r public .next/standalone/ || true
-
-# Set environment variables
+# Thiết lập biến môi trường mặc định
 ENV NODE_ENV=production
 ENV PORT=3002
 ENV HOSTNAME=0.0.0.0
 
-# Start application with Node.js directly (standalone mode)
-CMD ["node", ".next/standalone/server.js"]
+# Chạy ứng dụng bằng npm start
+CMD ["npm", "start"]
