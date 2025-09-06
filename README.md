@@ -277,8 +277,8 @@ cd src/client && npm run dev
 
 ---
 
-## 📱 Screenshots & Demo
-![Dashboard](docs/images/courses.png)
+## 📱 Poster
+![Dashboard](docs/images/poster.png)
 
 ## 🤝 Contributing
 
